@@ -29,8 +29,15 @@ class TransactionCreate(BaseModel):
 
 # --- Routes ---
 @app.get("/transactions")
-def get_transactions(db: Session = Depends(get_db)):
-    return db.query(models.Transaction).all()
+def get_transactions(month: Optional[str] = None, db: Session = Depends(get_db)):
+    query = db.query(models.Transaction)
+    if month:
+        year, m = month.split("-")
+        query = query.filter(
+            models.Transaction.date >= date(int(year), int(m), 1),
+            models.Transaction.date <= date(int(year), int(m), 28)
+        )
+    return query.all()
 
 @app.post("/transactions")
 def create_transaction(t: TransactionCreate, db: Session = Depends(get_db)):
