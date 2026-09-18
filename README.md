@@ -1,5 +1,9 @@
 # Budget Planner
 
+## Live Demo
+Frontend: https://your-vercel-url.vercel.app  
+Backend: Coming soon (deploying to Render)
+
 A full-stack web app for tracking personal income and expenses.
 
 ![Budget Planner Screenshot](screenshot.png)
