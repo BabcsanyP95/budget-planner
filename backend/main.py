@@ -44,6 +44,10 @@ def get_transactions(month: Optional[str] = None, db: Session = Depends(get_db))
 
 @app.post("/transactions")
 def create_transaction(t: TransactionCreate, db: Session = Depends(get_db)):
+    if t.type not in ["income", "expense"]:
+        raise HTTPException(status_code=400, detail="Type must be income or expense")
+    if t.amount <= 0:
+        raise HTTPException(status_code=400, detail="Amount must be positive")
     db_transaction = models.Transaction(**t.model_dump())
     db.add(db_transaction)
     db.commit()
