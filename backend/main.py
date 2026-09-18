@@ -49,7 +49,7 @@ def create_transaction(t: TransactionCreate, db: Session = Depends(get_db)):
 
 @app.delete("/transactions/{id}")
 def delete_transaction(id: int, db: Session = Depends(get_db)):
-    t = db.query(models.Transaction).filter(models.Transaction.id == id).get(id)
+    t = db.get(models.Transaction, id)
     if not t:
         raise HTTPException(status_code=404, detail="Transaction not found")
     db.delete(t)
