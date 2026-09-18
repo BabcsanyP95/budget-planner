@@ -3,3 +3,5 @@ node_modules/
 __pycache__/
 *.db
 .env
+frontend/package.json
+frontend/package-lock.json
