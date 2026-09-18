@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
+import Chart from "./Chart"
 
 const API = "http://127.0.0.1:8000"
 
@@ -95,6 +96,8 @@ function App() {
             </strong>
           </div>
         </div>
+
+        <Chart summary={summary} />
 
         {/* Add Transaction Form */}
         <form onSubmit={handleSubmit} style={styles.formCard}>
