@@ -6,6 +6,7 @@ import models
 from pydantic import BaseModel
 from datetime import date
 from typing import Optional
+from calendar import monthrange
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -33,9 +34,11 @@ def get_transactions(month: Optional[str] = None, db: Session = Depends(get_db))
     query = db.query(models.Transaction)
     if month:
         year, m = month.split("-")
+        year_int, m_int = int(year), int(m)
+        last_day = monthrange(year_int, m_int)[1]
         query = query.filter(
-            models.Transaction.date >= date(int(year), int(m), 1),
-            models.Transaction.date <= date(int(year), int(m), 28)
+            models.Transaction.date >= date(year_int, m_int, 1),
+            models.Transaction.date <= date(year_int, m_int, last_day)
         )
     return query.all()
 
