@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 import Chart from "./Chart"
 
-const API = "http://127.0.0.1:8000"
+const API = "https://budget-planner-api-tojd.onrender.com/"
 
 function App() {
   const [transactions, setTransactions] = useState([])
