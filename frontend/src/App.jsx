@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 import Chart from "./Chart"
 
-const API = "https://budget-planner-api-tojd.onrender.com"
+const API = "https://budget-planner-api-tojd.onrender.com".replace(/\/$/, "")
 
 function App() {
   const [transactions, setTransactions] = useState([])
@@ -19,8 +19,8 @@ function App() {
   const fetchData = async (selectedMonth) => {
     try {
       const [t, s] = await Promise.all([
-        axios.get(`https://budget-planner-api-tojd.onrender.com/transactions`, { params: { month: selectedMonth } }),
-        axios.get(`https://budget-planner-api-tojd.onrender.com/summary`, { params: { month: selectedMonth } })
+        axios.get(`${API}/transactions`, { params: { month: selectedMonth } }),
+        axios.get(`${API}/summary`, { params: { month: selectedMonth } })
       ])
       setTransactions(t.data)
       setSummary(s.data)
