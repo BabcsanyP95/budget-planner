@@ -19,8 +19,8 @@ function App() {
   const fetchData = async (selectedMonth) => {
     try {
       const [t, s] = await Promise.all([
-        axios.get(`${API}/transactions`, { params: { month: selectedMonth } }),
-        axios.get(`${API}/summary`, { params: { month: selectedMonth } })
+        axios.get(`https://budget-planner-api-tojd.onrender.com/transactions`, { params: { month: selectedMonth } }),
+        axios.get(`https://budget-planner-api-tojd.onrender.com/summary`, { params: { month: selectedMonth } })
       ])
       setTransactions(t.data)
       setSummary(s.data)
